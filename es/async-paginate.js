@@ -48,6 +48,8 @@ function (_Component) {
         search: '',
         menuIsOpen: false
       });
+
+      if (_this.props.onMenuClose) _this.props.onMenuClose.call(_assertThisInitialized(_this));
     });
 
     _defineProperty(_assertThisInitialized(_this), "onMenuOpen",
@@ -77,6 +79,9 @@ function (_Component) {
               return _this.loadOptions();
 
             case 6:
+              if (_this.props.onMenuOpen) _this.props.onMenuOpen.call(_assertThisInitialized(_this));
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -112,6 +117,9 @@ function (_Component) {
                 return _this.loadOptions();
 
               case 6:
+                if (_this.props.onInputChange) _this.props.onInputChange.call(_assertThisInitialized(_this));
+
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -368,6 +376,9 @@ _defineProperty(AsyncPaginate, "propTypes", {
   reduceOptions: PropTypes.func,
   SelectComponent: ComponentPropType,
   components: PropTypes.objectOf(PropTypes.func),
+  onInputChange: PropTypes.func,
+  onMenuClose: PropTypes.func,
+  onMenuOpen: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   cacheUniq: PropTypes.any,
   selectRef: PropTypes.func
