@@ -50,6 +50,7 @@ function (_Component) {
       });
 
       if (_this.props.onMenuClose) _this.props.onMenuClose.call(_assertThisInitialized(_this));
+      if (_this.props.dropCacheOnMenuClose) _this.setCacheToDefault();
     });
 
     _defineProperty(_assertThisInitialized(_this), "onMenuOpen",
@@ -180,6 +181,13 @@ function (_Component) {
   }
 
   _createClass(AsyncPaginate, [{
+    key: "setCacheToDefault",
+    value: function setCacheToDefault() {
+      this.setState({
+        optionsCache: props.options
+      });
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(oldProps) {
       var cacheUniq = this.props.cacheUniq;
@@ -378,6 +386,7 @@ _defineProperty(AsyncPaginate, "propTypes", {
   components: PropTypes.objectOf(PropTypes.func),
   onInputChange: PropTypes.func,
   onMenuClose: PropTypes.func,
+  dropCacheOnMenuClose: PropTypes.bool,
   onMenuOpen: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   cacheUniq: PropTypes.any,
