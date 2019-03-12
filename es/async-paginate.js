@@ -236,7 +236,7 @@ function (_Component) {
                 debounceTimeout = this.props.debounceTimeout;
 
                 if (!(debounceTimeout > 0)) {
-                  _context4.next = 17;
+                  _context4.next = 13;
                   break;
                 }
 
@@ -254,44 +254,32 @@ function (_Component) {
                 return _context4.abrupt("return");
 
               case 13:
-                _context4.next = 15;
-                return updateCache();
-
-              case 15:
-                _context4.next = 19;
-                break;
-
-              case 17:
-                _context4.next = 19;
-                return updateCache();
-
-              case 19:
-                _context4.prev = 19;
+                _context4.prev = 13;
                 _loadOptions2 = this.props.loadOptions;
-                _context4.next = 23;
+                _context4.next = 17;
                 return _loadOptions2(search, currentOptions.options, currentOptions.additional);
 
-              case 23:
+              case 17:
                 response = _context4.sent;
                 options = response.options;
                 hasMore = response.hasMore;
                 additional = response.additional;
                 hasError = false;
-                _context4.next = 33;
+                _context4.next = 27;
                 break;
 
-              case 30:
-                _context4.prev = 30;
-                _context4.t0 = _context4["catch"](19);
+              case 24:
+                _context4.prev = 24;
+                _context4.t0 = _context4["catch"](13);
                 hasError = true;
 
-              case 33:
+              case 27:
                 if (!hasError) {
-                  _context4.next = 38;
+                  _context4.next = 32;
                   break;
                 }
 
-                _context4.next = 36;
+                _context4.next = 30;
                 return this.setState(function (prevState) {
                   return {
                     optionsCache: _objectSpread({}, prevState.optionsCache, _defineProperty({}, search, _objectSpread({}, currentOptions, {
@@ -300,14 +288,14 @@ function (_Component) {
                   };
                 });
 
-              case 36:
-                _context4.next = 42;
+              case 30:
+                _context4.next = 36;
                 break;
 
-              case 38:
+              case 32:
                 newAdditional = typeof additional === 'undefined' ? null : additional;
                 reduceOptions = this.props.reduceOptions;
-                _context4.next = 42;
+                _context4.next = 36;
                 return this.setState(function (prevState) {
                   return {
                     optionsCache: _objectSpread({}, prevState.optionsCache, _defineProperty({}, search, _objectSpread({}, currentOptions, {
@@ -320,12 +308,12 @@ function (_Component) {
                   };
                 });
 
-              case 42:
+              case 36:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[19, 30]]);
+        }, _callee4, this, [[13, 24]]);
       }));
 
       function loadOptions() {

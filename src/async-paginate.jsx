@@ -199,9 +199,6 @@ class AsyncPaginate extends Component {
       if (search !== newSearch) {
         return;
       }
-      await updateCache();
-    } else {
-      await updateCache();
     }
 
     let hasError;
