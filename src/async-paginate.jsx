@@ -85,8 +85,8 @@ class AsyncPaginate extends Component {
     };
   }
 
-  setCacheToDefault(){
-    this.setState({optionsCache: props.options});
+  dropCache(){
+    this.setState({optionsCache: {}});
   }
 
   componentDidUpdate(oldProps) {
@@ -121,7 +121,7 @@ class AsyncPaginate extends Component {
       menuIsOpen: false,
     });
     if(this.props.onMenuClose) this.props.onMenuClose.call(this);
-    if(this.props.dropCacheOnMenuClose) this.setCacheToDefault();
+    if(this.props.dropCacheOnMenuClose) this.dropCache();
   }
 
   onMenuOpen = async () => {

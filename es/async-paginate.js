@@ -50,7 +50,7 @@ function (_Component) {
       });
 
       if (_this.props.onMenuClose) _this.props.onMenuClose.call(_assertThisInitialized(_this));
-      if (_this.props.dropCacheOnMenuClose) _this.setCacheToDefault();
+      if (_this.props.dropCacheOnMenuClose) _this.dropCache();
     });
 
     _defineProperty(_assertThisInitialized(_this), "onMenuOpen",
@@ -181,10 +181,10 @@ function (_Component) {
   }
 
   _createClass(AsyncPaginate, [{
-    key: "setCacheToDefault",
-    value: function setCacheToDefault() {
+    key: "dropCache",
+    value: function dropCache() {
       this.setState({
-        optionsCache: props.options
+        optionsCache: {}
       });
     }
   }, {
