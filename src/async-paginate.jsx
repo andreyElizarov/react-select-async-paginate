@@ -148,7 +148,7 @@ class AsyncPaginate extends Component {
       optionsCache,
     } = this.state;
 
-    if (!optionsCache[search]) {
+    if (!optionsCache[search] && this.state.menuIsOpen) {
       await this.loadOptions();
     }
     if(this.props.onInputChange) this.props.onInputChange.call(this);
