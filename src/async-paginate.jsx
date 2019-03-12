@@ -36,6 +36,10 @@ class AsyncPaginate extends Component {
 
     SelectComponent: ComponentPropType,
     components: PropTypes.objectOf(PropTypes.func),
+    onInputChange: PropTypes.func,
+    onMenuClose: PropTypes.func,
+    dropCacheOnMenuClose: PropTypes.bool,
+    onMenuOpen: PropTypes.func,
 
     // eslint-disable-next-line react/forbid-prop-types
     cacheUniq: PropTypes.any,
@@ -81,6 +85,10 @@ class AsyncPaginate extends Component {
     };
   }
 
+  dropCache(){
+    this.setState({optionsCache: {}});
+  }
+
   componentDidUpdate(oldProps) {
     const {
       cacheUniq,
@@ -112,6 +120,8 @@ class AsyncPaginate extends Component {
       search: '',
       menuIsOpen: false,
     });
+    if(this.props.onMenuClose) this.props.onMenuClose.call(this);
+    if(this.props.dropCacheOnMenuClose) this.dropCache();
   }
 
   onMenuOpen = async () => {
@@ -126,6 +136,7 @@ class AsyncPaginate extends Component {
     if (!optionsCache['']) {
       await this.loadOptions();
     }
+    if(this.props.onMenuOpen) this.props.onMenuOpen.call(this);
   }
 
   onInputChange = async (search) => {
@@ -137,9 +148,10 @@ class AsyncPaginate extends Component {
       optionsCache,
     } = this.state;
 
-    if (!optionsCache[search]) {
+    if (!optionsCache[search] && this.state.menuIsOpen) {
       await this.loadOptions();
     }
+    if(this.props.onInputChange) this.props.onInputChange.call(this);
   }
 
   handleScrolledToBottom = async () => {

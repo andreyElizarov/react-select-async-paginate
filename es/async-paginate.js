@@ -48,6 +48,9 @@ function (_Component) {
         search: '',
         menuIsOpen: false
       });
+
+      if (_this.props.onMenuClose) _this.props.onMenuClose.call(_assertThisInitialized(_this));
+      if (_this.props.dropCacheOnMenuClose) _this.dropCache();
     });
 
     _defineProperty(_assertThisInitialized(_this), "onMenuOpen",
@@ -77,6 +80,9 @@ function (_Component) {
               return _this.loadOptions();
 
             case 6:
+              if (_this.props.onMenuOpen) _this.props.onMenuOpen.call(_assertThisInitialized(_this));
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -103,7 +109,7 @@ function (_Component) {
               case 2:
                 optionsCache = _this.state.optionsCache;
 
-                if (optionsCache[search]) {
+                if (!(!optionsCache[search] && _this.state.menuIsOpen)) {
                   _context2.next = 6;
                   break;
                 }
@@ -112,6 +118,9 @@ function (_Component) {
                 return _this.loadOptions();
 
               case 6:
+                if (_this.props.onInputChange) _this.props.onInputChange.call(_assertThisInitialized(_this));
+
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -172,6 +181,13 @@ function (_Component) {
   }
 
   _createClass(AsyncPaginate, [{
+    key: "dropCache",
+    value: function dropCache() {
+      this.setState({
+        optionsCache: {}
+      });
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(oldProps) {
       var cacheUniq = this.props.cacheUniq;
@@ -368,6 +384,10 @@ _defineProperty(AsyncPaginate, "propTypes", {
   reduceOptions: PropTypes.func,
   SelectComponent: ComponentPropType,
   components: PropTypes.objectOf(PropTypes.func),
+  onInputChange: PropTypes.func,
+  onMenuClose: PropTypes.func,
+  dropCacheOnMenuClose: PropTypes.bool,
+  onMenuOpen: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   cacheUniq: PropTypes.any,
   selectRef: PropTypes.func
