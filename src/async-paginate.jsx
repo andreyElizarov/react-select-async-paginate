@@ -38,6 +38,7 @@ class AsyncPaginate extends Component {
     components: PropTypes.objectOf(PropTypes.func),
     onInputChange: PropTypes.func,
     onMenuClose: PropTypes.func,
+    dropCacheOnMenuClose: PropTypes.bool,
     onMenuOpen: PropTypes.func,
 
     // eslint-disable-next-line react/forbid-prop-types
@@ -84,6 +85,10 @@ class AsyncPaginate extends Component {
     };
   }
 
+  setCacheToDefault(){
+    this.setState({optionsCache: props.options});
+  }
+
   componentDidUpdate(oldProps) {
     const {
       cacheUniq,
@@ -116,6 +121,7 @@ class AsyncPaginate extends Component {
       menuIsOpen: false,
     });
     if(this.props.onMenuClose) this.props.onMenuClose.call(this);
+    if(this.props.dropCacheOnMenuClose) this.setCacheToDefault();
   }
 
   onMenuOpen = async () => {
